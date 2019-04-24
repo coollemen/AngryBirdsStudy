@@ -40,6 +40,7 @@ public class Pig : MonoBehaviour
         {
             render.sprite = hurt;
         }
+        
     }
 
     void Dead()

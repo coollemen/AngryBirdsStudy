@@ -18,7 +18,7 @@ public class Bird : MonoBehaviour
     public LineRenderer leftLineRender;
 
     public LineRenderer rightLineRender;
-
+    public GameObject boom;
     public bool isFired = false;
     // Start is called before the first frame update
     void Start()
@@ -65,15 +65,25 @@ public class Bird : MonoBehaviour
     private void Fly()
     {
         sp.enabled = false;
+        Invoke("Next",5f);
     }
 
     void Line()
     {
+        if(rightPos==null ||leftPos==null)return;
+
         rightLineRender.SetPosition(0,rightPos.position);
         rightLineRender.SetPosition(1,transform.position);
         
         leftLineRender.SetPosition(0,leftPos.position);
         leftLineRender.SetPosition(1,transform.position);
         
+    }
+
+    public void Next()
+    {
+        GameManager.instance.NextBird();
+        Destroy(this.gameObject);
+        Instantiate(boom, transform.position, Quaternion.identity);
     }
 }
